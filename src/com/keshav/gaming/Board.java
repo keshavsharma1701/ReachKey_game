@@ -37,6 +37,7 @@ public class Board extends JPanel implements Constants{
 	//Enemy enemy;
 	Enemy enemies[];
 	//throw early catch later
+	Sound sound;
 	
 	public Board() throws Exception{
 		setSize(BOARD_WIDTH, BOARD_HEIGHT);
@@ -46,6 +47,7 @@ public class Board extends JPanel implements Constants{
 		count=0;
 		enemies = new Enemy[MAX_ENEMY];//all member are null initially
 		web = new Web();
+		sound = new Sound();
 		 loadEnemies();
 		 setFocusable(true);
 		 bindEvents();
@@ -73,6 +75,8 @@ public class Board extends JPanel implements Constants{
 		for(Enemy e : enemies) {
 			if(isCollide(player , e)) {
 				gameMessage = "Game Over";
+				sound.setChecksound("collide");
+				sound.soundplay();
 				timer.stop();
 			}
 		}
@@ -80,6 +84,8 @@ public class Board extends JPanel implements Constants{
 			for(Enemy e : enemies) {
 				if(isCollide(e, weapon)) {
 					e.setisAlive(false);
+					sound.setChecksound("enemydie");
+					sound.soundplay();
 				}
 			}
 		}
@@ -88,6 +94,8 @@ public class Board extends JPanel implements Constants{
 	void isGameWin() {
 		if(player.testLimit()) {
 			gameMessage = "Game Win";
+			sound.setChecksound("win");
+			sound.soundplay();
 			timer.stop();
 		}
 	}
@@ -102,10 +110,14 @@ public class Board extends JPanel implements Constants{
 				}
 				else if(e.getKeyCode()==KeyEvent.VK_UP) {
 					player.jump();
+					sound.setChecksound("jump");
+					sound.soundplay();
 				}
 				else if(e.getKeyCode()== KeyEvent.VK_F) {
 					try {
 						player.addWeapon(player.getX() + player.getW(), player.getY() + player.getH()/2);
+						sound.setChecksound("weapon");
+						sound.soundplay();
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

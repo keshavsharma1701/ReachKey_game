@@ -1,4 +1,4 @@
-package com.keshav.gaming;
+ package com.keshav.gaming;
 
 import javax.swing.JFrame;
 
@@ -13,7 +13,7 @@ public class GameFrame extends JFrame implements Constants{
 		
 		this.setSize(BOARD_WIDTH, BOARD_HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Horror Game - 2022");
+		setTitle("Horror Game");
 		setLocationRelativeTo(null);
 		setResizable(false);
 		add(board);
